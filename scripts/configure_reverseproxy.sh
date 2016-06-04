@@ -1,3 +1,4 @@
+#!/bin/bash
 bash ./variables.sh
 # ./install_some_packages_early_temp_fix.sh
 ./configure_core.sh
