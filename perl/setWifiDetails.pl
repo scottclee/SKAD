@@ -49,7 +49,7 @@ network={
 close $fh;
 
 if ($msg eq "") {
-	$msg = "Details have been stored and Guard Dog will try to connect. Go to $queries{essid} network and type http://guarddog-dev in your browser. If you do not see Guard Dog web page then connect back to the GuardDog network and re-enter password";
+	$msg = "Details have been stored and Guard Dog will try to connect. Go to $queries{essid} network and type http://guarddog-dev:9000 in your browser. If you do not see Guard Dog web page then connect back to the GuardDog network and re-enter password";
 }
 
 print "{ \"msg\" : \"$msg\" }\n";

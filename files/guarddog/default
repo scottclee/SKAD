@@ -14,8 +14,8 @@
 # Default server configuration
 #
 server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
+	listen 9000 default_server;
+	listen [::]:9000 default_server;
 
 	# SSL configuration
 	#
@@ -62,9 +62,15 @@ server {
 }
 
 server {
+    listen 80;
+    server_name _;
+    return 301 http://$host:9000$request_uri;
+}
+
+server {
     listen 443;
     server_name _;
-    return 301 http://$host$request_uri;
+    return 301 http://$host:9000$request_uri;
 }
 
 
