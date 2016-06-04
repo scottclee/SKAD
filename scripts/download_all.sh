@@ -12,5 +12,6 @@ unzip ${branch}.zip
 rm ${branch}.zip
 ln -s SKAD-${branch} SKAD
 chmod +x SKAD/scripts/*.sh
-sudo ./SKAD/scripts/configure_expandRootFs.sh
-echo "Reboot before running configure scripts"
+echo "If this is a fresh Raspbian install then run the following first:"
+echo "sudo ./SKAD/scripts/configure_expandRootFs.sh"
+

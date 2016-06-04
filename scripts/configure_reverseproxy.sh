@@ -1,4 +1,4 @@
-./install_packages.sh
+# ./install_some_packages_early_temp_fix.sh
 ./configure_core.sh
 ./configure_nginx.sh
 ./configure_php.sh
