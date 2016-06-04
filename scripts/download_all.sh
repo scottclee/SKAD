@@ -2,7 +2,7 @@
 cd /home/pi
 mkdir git
 cd git
-git clone https://github.com/scottclee/SKAD.gi
+git clone https://github.com/scottclee/SKAD.git
 cd /home/pi
 ln -s ./git/SKAD SKAD
 sudo ./SKAD/scripts/expandRootFs.sh
