@@ -1,5 +1,7 @@
 #!/bin/bash
-bash ./variables.sh
+<<<<<<< HEAD
+source ./variables.sh
+>>>>>>> fd6ef6f52280a65dd04f7c39c44927b312be5352
 # ./install_some_packages_early_temp_fix.sh
 ./configure_core.sh
 ./configure_nginx.sh
