@@ -1,4 +1,4 @@
-source ./variables.sh
+bash ./variables.sh
 # ./install_some_packages_early_temp_fix.sh
 ./configure_core.sh
 ./configure_nginx.sh
