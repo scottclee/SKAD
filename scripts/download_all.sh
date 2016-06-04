@@ -8,6 +8,7 @@ cd git
 git clone https://github.com/scottclee/SKAD.git
 cd /home/pi
 ln -s ./git/SKAD SKAD
+chmod 755 ./SKAD/scripts/*
 sudo ./SKAD/scripts/expandRootFs.sh
 
 ###############################################################
