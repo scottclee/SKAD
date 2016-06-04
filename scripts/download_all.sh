@@ -1,4 +1,7 @@
 #!/bin/bash
+sudo apt-get update
+sudo apt-get -y upgrade
+sudo apt-get -y install vim git
 cd /home/pi
 mkdir git
 cd git
