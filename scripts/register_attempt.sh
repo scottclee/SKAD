@@ -18,6 +18,18 @@ UNAME=`uname -a`
 # The key should be stored in a local file
 KEY=`cat /sys/class/net/eth0/address`
 
+FILE=/tmp/externalip.txt
+EXTERNALIP=""
+
+`find $FILE -mmin +1 -exec rm {} \;`
+
+if [ ! -f $FILE ]; then
+        EXTERNALIP=`curl -s http://ipecho.net/plain`
+        echo $EXTERNALIP > $FILE
+else
+        EXTERNALIP=`cat $FILE`
+fi
+
 read -r -d '' JSON << EOM
 {
 	"timestamp": "$TIME_STAMP",
@@ -28,6 +40,7 @@ read -r -d '' JSON << EOM
 	"service": "$PAM_SERVICE",
 	"TTY": "$PAM_TTY",
 	"uname": "$UNAME",
+	"externalip": "$EXTERNALIP",
 	"key": "$KEY"
 }
 EOM
