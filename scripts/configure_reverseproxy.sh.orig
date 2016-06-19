@@ -1,0 +1,18 @@
+#!/bin/bash
+source ./variables.sh
+# ./install_some_packages_early_temp_fix.sh
+./configure_core.sh
+./configure_nginx.sh
+./configure_php.sh
+./configure_cpanJson.sh
+./configure_webservices.sh
+./configure_headlesswifisetup.sh
+./configure_letsencrypt.sh
+./configure_hostname.sh $REVERSE_PROXY_BRANDING
+mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.orig
+cp /home/pi/SKAD/files/guarddog.unsecure/default /etc/nginx/sites-available/
+echo "Please reboot me now"
+
+# Note to self: I am going to simplify the install and break it into:
+# 1. configure_reverse_proxy.sh (which just installs the basic components that you need in order to manually edit config files for a reverse proxy)
+# 2. config_reverse_proxy_config_editor.sh (a layer that provides a Web interface for editing nginx config files and running letsencrypt)

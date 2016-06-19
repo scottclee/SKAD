@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Defender Dog by SKAD</title>
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/freelancer.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <a class="navbar-brand" href="#page-top">Defender Dog by SKAD</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="img/biz-brand_guard-dog.png" alt="">
+                    <div class="intro-text">
+                        <span class="name">Defender Dog</span>
+                        <hr class="star-light">
+                        <span class="skills">Serve - Protect - Uphold</span>
+                    </div>
+		    <div id="serverConfigs"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/freelancer.js"></script>
+
+	<script>
+	$(document).ready(function(){	
+		$.getJSON("php/exec.php?script=getNginxServerConfigs",
+		function(data) {
+			
+			if (data["servers"].length == 0)
+			{
+var formHTML = `
+Your Defender Dog is not yet secure. Please enter the domain name you would like to secure it against: e.g mydomain.example.com<BR>
+
+<form>
+  <fieldset class='form-group'>
+    <label for='exampleInputPassword1'>Domain(s)</label>
+    <input type='text' class='form-control' id='domains' placeholder='mydomain.example.com (space separate multiple values)'>
+  </fieldset>
+  <button id="domainSubmit" type='button' class='btn btn-primary'>Submit</button>
+</form>
+`;
+				$("#serverConfigs").append(formHTML);
+
+					$("#domainSubmit").click(function(e) {
+					domains = $("#domains").val();
+					$.getJSON("php/exec.php?script=checkDomains&domains="+domains, function(data) {
+						//alert(JSON.stringify(data));
+
+						externalIP = data["externalIP"];
+						domainsArray = data["domains"];
+
+						$("#serverConfigs").empty();
+
+						if (domainsArray.length > 0) {
+							//$("#serverConfigs").append(JSON.stringify(data));
+							mismatches = "";
+
+							for (i=0; i < domainsArray.length; i++) {
+								if (domainsArray[i].address != externalIP) {
+									mismatches += domainsArray[i].domain + " = " + domainsArray[i].address + "<BR>";
+								}
+							}
+
+							if (mismatches != "") {
+								// There was a mismatch
+								$("#serverConfigs").append("Please set the following domains to your external IP address (" + externalIP + ") in order to continue:<BR>");
+								$("#serverConfigs").append(mismatches);
+							}
+							else {
+								// All good so let's continue
+								$("#serverConfigs").append("Attempting to perform handshake with Defender Dog via " + domainsArray[0].domain);	
+
+								// Try port routing handshakes for the first domain (we've confirmed they all point to the same address above)
+								$.getJSON("php/exec.php?script=testPortRouting&domain="+domainsArray[0].domain+"&port=80", function(data) {
+									
+									$("#serverConfigs").empty();
+
+									if (data["success"] == "true") {
+										$("#serverConfigs").append("Handshake on " + domainsArray[0].domain + " port 80 confirmed. Now trying port 443");
+
+										$.getJSON("php/exec.php?script=testPortRouting&domain="+domainsArray[0].domain+"&port=443", function(data) {
+									
+											$("#serverConfigs").empty();
+
+											if (data["success"] == "true") {
+												$.getJSON("php/exec.php?script=createSSL&domains="+domains, function(data) {
+													// This call will not return as nginx will be shut down during the script call
+												});
+
+												$("#serverConfigs").append("SSL certificates being created. Make an automatic call to refresh the browser in a few seconds to http://"+domainsArray[0].domain+" and it should then redirect through to HTTPS");
+											}
+											else {
+												if (data["HTTPCode"] == "404") {
+													$("#serverConfigs").append("Here's the important bit... please put Defender Dog in your router's DMZ or route port 443 to it and press the retry button. Go to www.skad.io for instructions");
+												}
+												else {
+													$("#serverConfigs").append(JSON.stringify(data));
+												}
+											}
+										});
+									}
+									else {
+										if (data["HTTPCode"] == "404") {
+											$("#serverConfigs").append("Here's the important bit... please put Defender Dog in your router's DMZ or route port 80 to it and press the retry button. Go to www.skad.io for instructions");
+										}
+										else {
+											$("#serverConfigs").append(JSON.stringify(data));
+										}
+									}
+								});
+
+
+
+							}
+						}
+						else {
+							// Possibly something might have gone wrong
+							$("#serverConfigs").append("Something went wrong. Try again");
+						}
+					});
+				});
+
+			}
+			else
+			{
+				$("#serverConfigs").append(JSON.stringify(data));
+			}	
+		}); 	
+	});
+
+	</script>
+
+</body>
+
+</html>

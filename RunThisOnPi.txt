@@ -1,1 +1,1 @@
-wget https://github.com/scottclee/SKAD/raw/laptop/scripts/download_all.sh -v -O download_all.sh && chmod +x download_all.sh && ./download_all.sh laptop; rm -rf download_all.sh
+wget https://raw.githubusercontent.com/scottclee/SKAD/master/scripts/download_all.sh -v -O download_all.sh && chmod +x download_all.sh && ./download_all.sh master; rm -rf download_all.sh
