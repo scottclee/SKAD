@@ -4,13 +4,17 @@
   <title>My Dog</title>
   <style>
 
-  body {
+    body {
   font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   padding: 50px;
   font-size: 13px;
   background: white;
 }
-
+img {
+  
+ float: right; 
+  width: 50px;
+}
 
 #span2 {
   direction: ltr;
@@ -21,6 +25,8 @@
   text-align: left;
   unicode-bidi: embed;
   width: auto;
+  float: right;
+  margin-right: 50px;
 }
 
 p {
@@ -29,15 +35,16 @@ p {
   cursor: pointer;
   display: block;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 300;
-  height: 136px;
+  
   letter-spacing: 0.259999990463257px;
   line-height: 32px;
   margin-bottom: 0px;
   margin-left: 0px;
   margin-right: 0px;
   margin-top: 0px;
+  padding-right:50px;
   text-align: left;
   white-space: pre-wrap;
   width: 505.984375px;
@@ -47,22 +54,24 @@ p {
 #div1 {
   display: inline-block;
   padding: 16px;
+  padding-bottom:20;
   margin: 10px 0;
   max-width: 506px;
   border: #ddd 1px solid;
   border-top-color: #eee;
   border-bottom-color: #bbb;
   border-radius: 5px;
+  background:#e1f5ff;
   box-shadow: 0 1px 3px rgba(0,0,0,0.15);
   font: bold 14px/18px Helvetica, Arial, sans-serif; */
   color: #000;
-}	
+}
   	
 </style>
   
 </head>
 
-<H1>The attempted attacks, as they happen</H1>
+<!--<H1>The attempted attacks, as they happen</H1>-->
 
 <?php
 
@@ -87,7 +96,9 @@ if ($name !== "" || $key !== "") {
 		$key = array_values($keys)[0]["key"];
 	}
 
-
+// Title of page:
+        echo "<H1>The attempted attacks on $name, as they happen</H1>\n";
+        
 	$query = array("key" => "$key");
 	
 	if (empty($name)) {
@@ -131,7 +142,10 @@ if ($name !== "" || $key !== "") {
 			}
 		}
 
-		$timestamp = $result["timestamp"];
+	//	$timestamp = date_format(date_create($result["timestamp"]), 'U = Y-m-d H:i:s');
+	//	$timestamp = date_create_from_format("Ymd-His", $result["timestamp"]);
+	        $timestamp = DateTime::createFromFormat('Ymd - His', $result["timestamp"])->format('d M Y  h:i:s');
+		//$timestamp = $result["timestamp"];
 		$org = $source["org"];
 		$city = $source["city"];
 		$country = $source["country"];
