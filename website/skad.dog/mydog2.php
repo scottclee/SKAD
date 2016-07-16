@@ -4,67 +4,51 @@
   <title>My Dog</title>
   <style>
 
-    body {
-  font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  padding: 50px;
-  font-size: 13px;
-  background: white;
-}
-img {
-  
- float: right; 
-  width: 50px;
+body {
+	padding: 50px;
+	background: white;
 }
 
-#span2 {
-  direction: ltr;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  height: auto;
-  line-height: 17.875px;
-  text-align: left;
-  unicode-bidi: embed;
-  width: auto;
-  float: right;
-  margin-right: 50px;
+.column {
+	width: 500px;	
+	margin: 0 auto;
 }
 
-p {
-  -webkit-locale: "en";
-  color: rgb(41, 47, 51);
-  cursor: pointer;
-  display: block;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 20px;
-  font-weight: 300;
-  
-  letter-spacing: 0.259999990463257px;
-  line-height: 32px;
-  margin-bottom: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-  padding-right:50px;
-  text-align: left;
-  white-space: pre-wrap;
-  width: 505.984375px;
-  word-wrap: break-word;
+.alert {
+	height: 100px;
+}  	
+
+.icon {
+	width: 70px;
+	height: 100%;
+	float: left;
 }
 
-#div1 {
-  display: inline-block;
-  padding: 16px;
-  padding-bottom:20;
-  margin: 10px 0;
-  max-width: 506px;
-  border: #ddd 1px solid;
-  border-top-color: #eee;
-  border-bottom-color: #bbb;
-  border-radius: 5px;
-  background:#e1f5ff;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-  font: bold 14px/18px Helvetica, Arial, sans-serif; */
-  color: #000;
+#dog-image {
+	width: 50px;
+}
+
+.title {
+	height: 20px;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 13px;
+}
+
+.message {
+	height: 100px;	
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	font-weight: 300;
+	color: rgb(41, 47, 51);
+}
+
+.solid-separator {
+	background-color: black;
+	height: 2px;
+}
+
+.clear-separator {
+	height: 10px;
 }
   	
 </style>
@@ -107,6 +91,9 @@ if ($name !== "" || $key !== "") {
 	else {
 		$results = $attempts->find($query)->sort(array('timestamp'=>-1))->limit((int)$limit);
 	}
+
+//	echo "<div class='outer-column'>\n";
+	echo "<div class='column'>\n";
 
 	$apicount = 0;
 	$sourcesCache = array();
@@ -152,6 +139,7 @@ if ($name !== "" || $key !== "") {
 		$rhost = $result["rhost"];
 		$user = $result["user"];
 
+/*
 		echo "<div id='div1'>\n";
 		echo "<img id='img1' src='skaddog_small.jpg'></img>\n";
 		echo "<span id='span1'>&rlm;</span>\n";
@@ -160,7 +148,17 @@ if ($name !== "" || $key !== "") {
 		echo "$org ($rhost) tried to logon as [$user] from $city in $country #alerted =$name=";
 		echo "</p>\n";
 		echo "</div>\n";
+*/
+		echo "	<div class='alert'>\n";
+		echo "		<div class='icon'><img id='dog-image' src='skaddog_small.jpg'></img></div>\n";
+		echo "		<div class='title'>$timestamp</div>\n";
+		echo "		<div class='message'>$org ($rhost) tried to logon as [$user] from $city in $country #alerted =$name=</div>\n";
+		echo "	</div>\n";
+		echo "	<div class='solid-separator'></div>\n";
+		echo "	<div class='clear-separator'></div>\n";
 	}
+
+	echo "</div>\n";
 }	
 
 ?>
