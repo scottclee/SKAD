@@ -8,4 +8,14 @@ sed -i "/success=1 default=ignore/c\auth\t[success=2 default=ignore]\tpam_unix.s
 line="00 00 * * * /home/pi/SKAD/scripts/remove_oldattemptsfromlog.sh"
 (crontab -u pi -l; echo "$line" ) | crontab -u pi -
 
-./create_dummyaccounts.sh
+# ./create_dummyaccounts.sh
+
+echo "Please enter the name of this new born Watch Dog:"
+read dogname
+
+./configure_hostname.sh $dogname
+
+echo "Change password so it is no longer the default one:"
+/usr/bin/passwd pi
+
+echo "Now reboot this machine"
