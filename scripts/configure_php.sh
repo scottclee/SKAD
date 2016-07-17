@@ -15,16 +15,15 @@ sed -e 's|#\tfastcgi_pass unix:/var/run/php5-fpm.sock;|\tfastcgi_pass unix:/var/
 sed -e 's|#location ~ /\\.ht {|location ~ /\\.ht {|g' -i /etc/nginx/sites-available/default
 sed -e 's|#\tdeny all;|\tdeny all;\n\t}|g' -i /etc/nginx/sites-available/default
 
-systemctl reload nginx.service
 
 cp /etc/php5/fpm/php.ini /etc/php5/fpm/php.ini.orig
 
 sed -e 's|;cgi.fix_pathinfo=1|cgi.fix_pathinfo=1|g' -i /etc/php5/fpm/php.ini
 
-systemctl reload php5-fpm.service
-
 echo '<?php' >> /var/www/html/info.php
 echo 'phpinfo();' >> /var/www/html/info.php
 echo '?>' >> /var/www/html/info.php
 
+sudo service nginx restart
+sudo service nginx php5-fpm
 
