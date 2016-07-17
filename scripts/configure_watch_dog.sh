@@ -18,4 +18,12 @@ read dogname
 echo "Change password so it is no longer the default one:"
 /usr/bin/passwd pi
 
+echo "##############################################################"
+echo "This dog's details are as follows:"
+
+./generate_unique_key.sh
+
+echo "Name: $dogname"
+echo "##############################################################"
+
 echo "Now reboot this machine"
