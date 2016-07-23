@@ -16,7 +16,7 @@ sudo su -
 #write out current crontab
 crontab -l > mycron
 #echo new cron into cron file
-echo "*/5 * * * * sudo /home/pi/SKAD/scripts/portscancheck.sh" >> mycron
+echo "*/5 * * * * sudo /home/pi/SKAD/scripts/portscancheck.sh >/dev/null 2>&1" >> mycron
 #install new cron file
 crontab mycron
 rm mycron
