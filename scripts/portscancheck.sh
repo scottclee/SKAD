@@ -15,8 +15,16 @@ linecount=0;
 scanblock=false;
 scanblockoffset=0;
 
+KEYFILE=/home/pi/watch_dog.key
+KEY_HASH=""
 
-KEY="$(cat /proc/cpuinfo | grep Serial | cut -d ':' -f 2 | tr -d ' ')"
+if [ ! -f $KEYFILE ]; then
+        KEY_HASH="MISSING"
+else
+        KEY_HASH=`cat $KEYFILE`
+fi
+
+
 
 FILES="$(find "$DIRECTORY" -maxdepth 2 -name '*email_alert')"
 echo $FILES 
@@ -100,7 +108,7 @@ read -r -d '' JSON << EOM
     "hostname" : "$HOSTNAME",
     "organisation" : "$ORG",
     "country" : "$COUNTRY",
-    "key": "$KEY"
+    "key": "$KEY_HASH"
 }
 EOM
 DATESTAMP="$(echo -e "$DATE" | tr -d ' ')";
