@@ -11,18 +11,33 @@ if [[ $hexval == "080a" ]]; then
 
 else 
 
-URL="https://skad.dog/attempt.php"
+# Get the git branch
+GIT_BRANCH=`cd /home/pi/SKAD && /usr/bin/git branch`
+INDEX=`awk -v a="$GIT_BRANCH" -v b="*" 'BEGIN{print index(a,b)}'`
+INDEX=$(($INDEX + 1));
+GIT_BRANCH=${GIT_BRANCH:INDEX};
+STRLEN=${#GIT_BRANCH}
+INDEX=`awk -v a="$GIT_BRANCH" -v b="\n" 'BEGIN{print index(a,b)}'`
+INDEX=$(($INDEX - $STRLEN - 1));
+GIT_BRANCH=${GIT_BRANCH:0:INDEX};
 
-if [ "$PAM_USER" == "skadtest" ]; then
-	URL="https://test.skad.dog/attempt.php"
-fi
+URL="https://$GIT_BRANCH.skad.dog/attempt.php"
 
 DATE=`date "+%Y%m%d"`
 TIME_STAMP=`date "+%Y%m%d-%H%M%S"`
 UNAME=`uname -a`
-# The key should be stored in a local file
-KEY=`cat /sys/class/net/eth0/address`
 
+# The key should be stored in a local file if not then it is missing
+KEYFILE=/home/pi/watch_dog.key
+KEY_HASH=""
+
+if [ ! -f $KEYFILE ]; then
+	KEY_HASH="MISSING"
+else
+        KEY_HASH=`cat $KEYFILE`
+fi
+
+# See if the EXTERNALIP address has been cached from a previous call
 FILE=/tmp/externalip.txt
 EXTERNALIP=""
 
@@ -46,11 +61,11 @@ read -r -d '' JSON << EOM
 	"TTY": "$PAM_TTY",
 	"uname": "$UNAME",
 	"externalip": "$EXTERNALIP",
-	"key": "$KEY"
+	"key": "$KEY_HASH"
 }
 EOM
 
-LOG_ENTRY="$TIME_STAMP, $PAM_USER, $password, $PAM_RUSER, $PAM_RHOST, $PAM_SERVICE, $PAM_TTY, $UNAME"
+LOG_ENTRY="$KEY_HASH, $TIME_STAMP, $PAM_USER, $password, $PAM_RUSER, $PAM_RHOST, $PAM_SERVICE, $PAM_TTY, $UNAME"
 
 echo "$LOG_ENTRY" >> /var/log/skad_dog.log
 
