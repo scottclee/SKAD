@@ -12,3 +12,6 @@ line="00 00 * * * /home/pi/SKAD/scripts/remove_oldattemptsfromlog.sh"
 (crontab -u pi -l; echo "$line" ) | crontab -u pi -
 
 ./create_dummyaccounts.sh
+
+# Add the DMZ check to run every minute
+`crontab -l | { cat; echo "* * * * * /home/pi/SKAD/scripts/check_DMZ_status.sh"; } | crontab -`
