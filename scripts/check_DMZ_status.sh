@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TIME_STAMP=`date "+%Y%m%d-%H%M%S"`
-
+HOSTNAME=`cat /etc/hostname`
 #echo ">>>>>>>>>>>>>>>>>" >> /tmp/skad.dog.txt
 #echo "TIME_STAMP: $TIME_STAMP" >> /tmp/skad.dog.txt
 
@@ -47,7 +47,6 @@ fi
 # Get the git branch
 GIT_BRANCH=`cd /home/pi/SKAD && /usr/bin/git branch`
 
-
 INDEX=`awk -v a="$GIT_BRANCH" -v b="*" 'BEGIN{print index(a,b)}'`
 INDEX=$(($INDEX + 1));
 GIT_BRANCH=${GIT_BRANCH:INDEX};
@@ -64,6 +63,7 @@ read -r -d '' JSON << EOM
 {
 	"timestamp": "$TIME_STAMP",
 	"externalip": "$EXTERNALIP",
+	"name": "$HOSTNAME",
 	"key": "$KEY_HASH",
 	"DMZ": "$DMZ"
 }
