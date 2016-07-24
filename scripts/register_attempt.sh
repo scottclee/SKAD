@@ -11,11 +11,17 @@ if [[ $hexval == "080a" ]]; then
 
 else 
 
-URL="https://skad.dog/attempt.php"
+# Get the git branch
+GIT_BRANCH=`cd /home/pi/SKAD && /usr/bin/git branch`
+INDEX=`awk -v a="$GIT_BRANCH" -v b="*" 'BEGIN{print index(a,b)}'`
+INDEX=$(($INDEX + 1));
+GIT_BRANCH=${GIT_BRANCH:INDEX};
+STRLEN=${#GIT_BRANCH}
+INDEX=`awk -v a="$GIT_BRANCH" -v b="\n" 'BEGIN{print index(a,b)}'`
+INDEX=$(($INDEX - $STRLEN - 1));
+GIT_BRANCH=${GIT_BRANCH:0:INDEX};
 
-if [ "$PAM_USER" == "skadtest" ]; then
-	URL="https://test.skad.dog/attempt.php"
-fi
+URL="https://$GIT_BRANCH.skad.dog/attempt.php"
 
 DATE=`date "+%Y%m%d"`
 TIME_STAMP=`date "+%Y%m%d-%H%M%S"`

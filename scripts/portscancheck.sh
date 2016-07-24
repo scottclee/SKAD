@@ -130,7 +130,10 @@ fi
 done
 
 #clean up the psad folder now we've sent them all
-FOLDERS="$(find "$DIRECTORY" -maxdepth 1 -name '*.*.*')";
+TIME_STAMP=`date "+%Y%m%d-%H%M%S"`
+FOLDERS="$(find "$DIRECTORY" -maxdepth 1 -type d -name '*.*.*')";
 for d in $FOLDERS; do
-  `mv $d /var/log/psad/archive`
+  filename="$(echo -e "$d" | cut -d '/' -f 5)";
+  echo "folder name is" $filename
+  `mv $d /var/log/psad/archive/$TIME_STAMP.$filename`
 done
