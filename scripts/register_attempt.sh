@@ -20,9 +20,18 @@ fi
 DATE=`date "+%Y%m%d"`
 TIME_STAMP=`date "+%Y%m%d-%H%M%S"`
 UNAME=`uname -a`
-# The key should be stored in a local file
-KEY=`cat /sys/class/net/eth0/address`
 
+# The key should be stored in a local file if not then it is missing
+KEYFILE=/home/pi/watch_dog.key
+KEY_HASH=""
+
+if [ ! -f $KEYFILE ]; then
+	KEY_HASH="MISSING"
+else
+        KEY_HASH=`cat $KEYFILE`
+fi
+
+# See if the EXTERNALIP address has been cached from a previous call
 FILE=/tmp/externalip.txt
 EXTERNALIP=""
 
@@ -46,11 +55,11 @@ read -r -d '' JSON << EOM
 	"TTY": "$PAM_TTY",
 	"uname": "$UNAME",
 	"externalip": "$EXTERNALIP",
-	"key": "$KEY"
+	"key": "$KEY_HASH"
 }
 EOM
 
-LOG_ENTRY="$TIME_STAMP, $PAM_USER, $password, $PAM_RUSER, $PAM_RHOST, $PAM_SERVICE, $PAM_TTY, $UNAME"
+LOG_ENTRY="$KEY_HASH, $TIME_STAMP, $PAM_USER, $password, $PAM_RUSER, $PAM_RHOST, $PAM_SERVICE, $PAM_TTY, $UNAME"
 
 echo "$LOG_ENTRY" >> /var/log/skad_dog.log
 
