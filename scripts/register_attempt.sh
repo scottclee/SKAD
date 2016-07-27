@@ -67,6 +67,7 @@ EOM
 
 LOG_ENTRY="$KEY_HASH, $TIME_STAMP, $PAM_USER, $password, $PAM_RUSER, $PAM_RHOST, $PAM_SERVICE, $PAM_TTY, $UNAME"
 
+echo "URL: $URL" >> /var/log/skad_dog.log
 echo "$LOG_ENTRY" >> /var/log/skad_dog.log
 
 JSON_FILE="/tmp/json.$TIME_STAMP.$RANDOM"
