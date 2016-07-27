@@ -55,34 +55,40 @@
                                 <li>
                                     <a href="index.html">Home</a>
                                 </li>
-                                <li>
-                                    <a href="https://medium.com/@SKAD">Blog</a>
+                                <li class="has-dropdown">
+                                    <a href="#">
+                                        Info
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <a href="https://medium.com/@SKAD">Blog</a>
+                                        </li>
+                                        <li>
+                                            <a href="learn.html">
+                                                Learn
+                                            </a>
+                                        </li>
+
+                                    </ul>
+
                                 </li>
                                 <li class="has-dropdown">
-                                    <a href="products.html">
+                                    <a href="#">
                                         Products
                                     </a>
-                   
-                                            <ul>
-                                                <li>
-                                                    <a href="watch-dog.html">
-                                                        Watch Dog
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="crypto-cat.html">
-                                                        Crypto Cat
-                                                    </a>
-                                                </li>
-                                                
-                                            </ul>
+
+                                    <ul>
+                                        <li>
+                                            <a href="watch-dog.html">
+                                                Watch Dog
+                                            </a>
+                                        </li>
+
+
+                                    </ul>
                                 </li>
+
                                 <li>
-                                    <a href="learn.html">
-                                        Learn
-                                    </a>
-                                </li>
-                                 <li>
                                     <a href="about-us.html">
                                         About Us
                                     </a>
@@ -137,7 +143,7 @@
                         <b>Watch Dog</b> gets its power through a micro USB cable. Plug the power into the outer of the two micro USB ports.
                     </p>  
                     <p class="mb0">
-                        Plug the provided, micro-USB-to-ethernet adapter into the inner micro USB port &#8211; the middle of the three visible ports on the long side. Use the provided ethernet-to-ethernet cable to connect the adapter to your router.
+                        Plug the provided micro-USB-to-ethernet adapter into the inner micro USB port &#8211; the middle of the three visible ports on the long side. Use the provided ethernet-to-ethernet cable to connect the adapter to your router.
                     </p> 
                 </div>
          </section>
@@ -150,7 +156,7 @@
                 <div class="col-md-6 col-md-offset-1 content">
                     <h3>Home <b>Watch Dog</b> in the DMZ</h3>
                     <p class="mb0">
-                        <b>Watch Dog</b> needs to be in the demilitarized zone (DMZ) of your home network. 
+                        <b>Watch Dog</b> needs to be in the DMZ of your home network. 
                     </p>
                     <p class="mb0">
                         Putting a device in the DMZ is a task you have to complete on your router. Because of this, the method differs depending on the type of router you have. 
@@ -161,8 +167,14 @@
                                         <span>What is the DMZ?</span>
                                     </div>
                                     <div class="content">
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        <p class="mb0">
+                                           DMZ stands for demilitarized zone and is the term used for the part of your home network that is accessible from the external internet. 
+                                        </p>
+                                        <p class="mb0">
+                                            Your router puts a firewall between the devices on your home network and the big bad web. To see all the attacks coming at your home, <b>Watch Dog by SKAD</b> has to sit in the DMZ, on the other side of that firewall. (Don't worry. Our pups are tough; they can take it.)
+                                        </p>
+                                        <p class="mb0">
+                                            Want to know more about the DMZ? <a href="https://en.wikipedia.org/wiki/DMZ_(computing)" target="_blank">Wikipedia</a> is as good a place as any to start.
                                         </p>
                                     </div>
                                 </li>
@@ -171,21 +183,22 @@
                                         <span>General router instructions</span>
                                     </div>
                                     <div class="content">
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        </p>  <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        </p>  <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        </p>  <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        </p>  <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        </p>  <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        </p>  <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        </p>
+                                        <ol>
+                                            <li>Go to your router's administration pages.
+                                                <p>
+                                                   To do this, open a browser window and type the IP address of your router. This address is of the form <b>http://192.168.x.x</b>.
+                                                </p>
+                                            </li>
+                                            <li>Find the DMZ settings.
+                                                <p>
+                                                    The location of these settings varies depending on the type of router you have. Look for menu items such as <b>Settings</b>, <b>Advanced</b>, <b>Port forwarding</b>, and <b>DMZ</b>.
+                                                </p>
+                                            </li>
+                                            <li>Select your <b>Watch Dog by SKAD</b> from the list of devices that can be put in the DMZ,
+                                                 <p>
+                                           The pup appears as <i>skad-dog</i> in the list of devices.
+                                        </p> </li>
+                                        </ol>
                                     </div>
                                 </li>
                                 <li>
@@ -193,14 +206,31 @@
                                         <span>Instructions for BT Home Hub</span>
                                     </div>
                                     <div class="content">
-                                        <p>
+                                        <ol>
+                                            <li>Go to your router's administration pages.
+                                                <p>
+                                                   This is usually found at <a href="http://192.168.1.254" target="_blank">http://192.168.1.254</a>.
+                                                </p>
+                                            </li>
+                                            <li>  <p>
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        </p>
+                                        </p></li><li>  <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        </p> </li><li> <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        </p> </li><li> <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        </p> </li><li> <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        </p> </li><li> <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        </p></li>
+                                        </ol>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="title">
-                                        <span>Instructions for Virgin Media router</span>
+                                        <span>Instructions for Virgin Super Hub</span>
                                     </div>
                                     <div class="content">
                                         <p>
@@ -210,7 +240,7 @@
                                 </li>
                                 <li>
                                     <div class="title">
-                                        <span>Instructions for Netgear router</span>
+                                        <span>Instructions for SkyHub</span>
                                     </div>
                                     <div class="content">
                                         <p>
