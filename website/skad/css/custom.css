@@ -11,3 +11,13 @@ a .dark-text{
 .emphasise{
 	font-size: 3em;
 }
+.photo-attribution{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 99;
+  color: white;
+}
+.photo-attribution a{
+  color: white;
+}
