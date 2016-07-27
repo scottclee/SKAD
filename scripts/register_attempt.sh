@@ -77,3 +77,4 @@ CMD="curl -i -X POST -d @$JSON_FILE $URL"
 `rm $JSON_FILE`
 
 fi
+
