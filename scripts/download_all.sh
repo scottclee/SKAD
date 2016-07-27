@@ -8,7 +8,7 @@ cd git
 git clone https://github.com/scottclee/SKAD.git
 cd /home/pi
 ln -s ./git/SKAD SKAD
-chmod 755 ./SKAD/scripts/*
+# chmod 755 ./SKAD/scripts/* # Shouldn't need to do this anymore as the file permissions should now be stored in github
 sudo ./SKAD/scripts/expandRootFs.sh
 
 ###############################################################
