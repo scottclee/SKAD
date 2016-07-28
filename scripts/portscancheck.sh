@@ -117,6 +117,8 @@ echo $JSON_FILE
 
 echo "$JSON" > $JSON_FILE
 
+
+echo "attack detected: $JSON" >> /var/log/skad_dog.log
 CMD="curl -i -X POST -d @$JSON_FILE $URL"
 `$CMD` &> /dev/null
 `rm $JSON_FILE`
@@ -136,4 +138,10 @@ for d in $FOLDERS; do
   filename="$(echo -e "$d" | cut -d '/' -f 5)";
   echo "folder name is" $filename
   `mv $d /var/log/psad/archive/$TIME_STAMP.$filename`
+done
+
+OLDFOLDERS="$(find "$DIRECTORY" -type d -ctime +7 -name '*.*.*')";
+for d in $OLDFOLDERS; do
+   echo "deleting old attack " $d
+  `rm -rf $d`
 done
